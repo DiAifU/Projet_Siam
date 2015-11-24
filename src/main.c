@@ -12,6 +12,7 @@
 void test_lancement()
 {
     test_type_etre_animal();
+    test_piece_etre_integre();
 }
 
 

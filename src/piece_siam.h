@@ -233,6 +233,6 @@ void piece_afficher_nom_cours(const piece_siam* piece);
  */
 piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 
-
+void test_piece_etre_integre(void);
 
 #endif
