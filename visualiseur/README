@@ -1,0 +1,9 @@
+Pour compiler:
+$ make
+
+(Ou en passant par le fichier CMakeList.txt
+$ cmake .
+$ make  )
+
+Pour lancer le visualiseur:
+$ ./visualiseur

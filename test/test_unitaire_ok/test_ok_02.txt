@@ -1,0 +1,9 @@
+#test_unitaire_ok_02
+#
+# test si il est possible de deplacer un elephant (lecture d'un fichier d'entree)
+lit ../test/test_unitaire_ok/test_ok_02_entree.txt
+d 1 0 ^ ^
+fin
+#comportement attendu:
+# l'elephant se deplace d'une case et son orientation est "haut"
+

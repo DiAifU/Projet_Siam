@@ -1,0 +1,9 @@
+#test_unitaire_ko_01
+#
+# test l'interdiction de poussee d'une piece en face a face
+lit ../test/test_unitaire_ko/test_ko_01_entree.txt
+d 0 1 ^ ^
+fin
+#Comportement attendu:
+# l'elephant et le rhinoceros sont face a face, aucune piece ne doit bouger, le mouvement est invalide.
+

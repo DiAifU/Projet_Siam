@@ -1,0 +1,9 @@
+#test_unitaire_ok_01
+#
+# test si il est possible d'introduire une piece
+i
+n 1 0 ^
+fin
+#comportement attendu:
+# introduit un elephant en direction haut en (1,0)
+
