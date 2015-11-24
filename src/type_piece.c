@@ -99,3 +99,22 @@ type_piece type_correspondre_caractere_animal(char type)
   }
   return type_enum;
 }
+
+void test_type_etre_animal()
+{
+  puts("test type etre animal");
+  if(type_etre_animal(elephant)!=1)
+    puts("elephant ko");
+  if(type_etre_animal(rhinoceros)!=1)
+    puts("rhinoceros ko");
+  if(type_etre_animal(rocher)!=0)
+    puts("rocher ko");
+  if(type_etre_animal(case_vide)!=0)
+    puts("case vide ko");
+  int k=0;
+  for(k=4;k<100;k++)
+    {
+      if(type_etre_animal(k)!=0)
+	printf("valeur %d KO\n",k);
+    }
+}
