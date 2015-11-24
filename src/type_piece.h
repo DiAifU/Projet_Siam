@@ -153,4 +153,6 @@ int type_caractere_animal_etre_integre(char type);
  */
 type_piece type_correspondre_caractere_animal(char type);
 
+void test_type_etre_animal(void);
+
 #endif
