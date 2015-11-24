@@ -7,6 +7,8 @@
 
 int piece_etre_integre(const piece_siam* piece)
 {
+    assert(piece!=NULL);
+  
     return 1; // modifier cette fonction
 }
 

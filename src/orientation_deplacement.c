@@ -18,7 +18,12 @@ int orientation_etre_integre(orientation_deplacement orientation)
 
 int orientation_etre_integre_deplacement(orientation_deplacement direction_deplacement)
 {
-    return 1; //fonction a ecrire
+    // direction_deplacement < 4 correspond a haut, bas, gauche, ou droite
+    // sinon (direction_deplacement >=4) ce n'est pas un déplacement.
+    // Il suffit donc que direction_deplacement soit < 4 pour désigner un déplacement valide
+    if(direction_deplacement<4)
+        return 1;
+    return 0;
 }
 
 const char* orientation_nommer(orientation_deplacement orientation)
@@ -108,11 +113,34 @@ orientation_deplacement orientation_inverser(orientation_deplacement orientation
 
 int orientation_caractere_etre_integre(char orientation)
 {
-    return 1; // fonction a ecrire
+    if (orientation == '^' || orientation == 'v' || orientation == '<' || orientation == '>')
+      return 1;
+    return 0;
 }
 
 
 orientation_deplacement orientation_correspondre_caractere(char orientation)
 {
-    return 1; //fonction a completer
+    assert(orientation_caractere_etre_integre(orientation));
+  
+    // "Look up table" (LUT) convertissant un caractère vers
+    //    l'enum orientation_deplacement correspondante.
+
+    switch(orientation)
+    {
+    case '^':
+        return haut; break;
+    case 'v':
+        return bas; break;
+    case '<':
+        return gauche; break;
+    case '>':
+        return droite; break;
+    default:
+        printf("Erreur, orientation piece %c non reconnue",orientation);
+        abort();
+    }
+
+    puts("Ne devrait jamais entrer sur cette ligne");
+    abort();
 }

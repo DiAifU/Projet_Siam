@@ -87,7 +87,7 @@ int type_caractere_animal_etre_integre(char type)
 
 type_piece type_correspondre_caractere_animal(char type)
 {
-  assert(type_caractere_animan_etre_intergre(type));
+  assert(type_caractere_animal_etre_integre(type));
   type_piece type_enum=elephant;
   if(type=='e')
   {

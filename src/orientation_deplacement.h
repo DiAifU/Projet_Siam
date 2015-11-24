@@ -65,7 +65,17 @@ typedef enum
 
 
 /**
- *    Documentation a ecrire
+ * Fonction orientation_etre_integre:
+ * *************************
+ *    Verifie qu'une orientation de déplacement correspond a une enumeration possible.
+ *    C'est a dire que la valeur de orientation_deplacement doit etre soit haut, bas,
+ *    gauche, droite ou aucune_orientation.
+ *
+ *    Necessite:
+ *      - Une enumeration de type orientation_deplacement
+ *    Garantie:
+ *      - Un retour valant 1 si orientation correspond aux types prevus.
+ *      - Un retour valant 0 sinon.
  */
 int orientation_etre_integre(orientation_deplacement orientation);
 
