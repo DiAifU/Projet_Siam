@@ -19,7 +19,12 @@ int type_etre_integre(type_piece type)
 
 int type_etre_animal(type_piece type)
 {
-    return 1; // Coder cette fonction (supprimer cette ligne et donner le code correspondant)
+    
+    // type 2 et 3 ne sont pas des animaux, mais type 0 et 1 le sont.
+    // Il faut donc que type soit < 2 pour que type soit un animal.
+    if(type<2)
+        return 1;
+    return 0;
 }
 
 
