@@ -151,12 +151,28 @@ int piece_etre_case_vide(const piece_siam* piece);
 void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement orientation);
 
 /**
- * Documentation a ecrire
+ * Fonction piece_definir_rocher:
+ * *************************
+ *    Définie une piece rocher
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une piece_siam modifiable.
+ *    Garantie:
+ *      - Une piece mise a jour avec le type rocher et l'orientation aucune_orientation.
+ *      - La piece doit etre integre.
  */
 void piece_definir_rocher(piece_siam* piece);
 
 /**
- * Documentation a ecrire
+ * Fonction piece_definir_case_vide:
+ * *************************
+ *    Définie une piece case_vide
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une piece_siam modifiable.
+ *    Garantie:
+ *      - Une piece mise a jour avec le type case_vide et l'orientation aucune_orientation.
+ *      - La piece doit etre integre.
  */
 void piece_definir_case_vide(piece_siam* piece);
 
@@ -204,7 +220,16 @@ void piece_afficher(const piece_siam* piece);
 void piece_afficher_nom_cours(const piece_siam* piece);
 
 /**
- * Documentation a ecrire
+ * Fonction piece_correspondre_nom_cours:
+ * *************************
+ *    Recupere la piece correspondant au nom cours donné
+ *      en parametre.
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers un nom_cours non modifiable et de longueur 3.
+ *    Garantie:
+ *      - Un retour avec une piece_siam correspondant au nom_cours donne
+ *         
  */
 piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 
