@@ -8,8 +8,17 @@
 int piece_etre_integre(const piece_siam* piece)
 {
     assert(piece!=NULL);
+    assert(type_etre_integre(piece->type));
+    assert(orientation_etre_integre(piece->orientation));
+    
+    if (type_etre_animal(piece->type)) {
+      if (orientation_etre_integre_deplacement(piece->orientation))
+	return 1;
+    }
+    else if (piece->orientation == aucune_orientation)
+      return 1;
   
-    return 1; // modifier cette fonction
+    return 0;
 }
 
 void piece_initialiser(piece_siam* piece)
@@ -24,21 +33,38 @@ void piece_initialiser(piece_siam* piece)
 
 int piece_etre_animal(const piece_siam* piece)
 {
-    return 1;//completer cette fonction
+    assert(piece!=NULL);
+    assert(piece_etre_integre(piece));
+    
+    if (type_etre_animal(piece->type))
+      return 1;
+  
+    return 0;
 }
 
 
 int piece_etre_rocher(const piece_siam* piece)
 {
-    return 1;//completer cette fonction
+    assert(piece!=NULL);
+    assert(piece_etre_integre(piece));
+    
+    if (piece->type == rocher)
+      return 1;
+  
+    return 0;
 }
 
 
 int piece_etre_case_vide(const piece_siam* piece)
 {
-    return 1;//completer cette fonction
+    assert(piece!=NULL);
+    assert(piece_etre_integre(piece));
+    
+    if (piece->type == case_vide)
+      return 1;
+  
+    return 0;
 }
-
 
 
 
@@ -46,9 +72,14 @@ int piece_etre_case_vide(const piece_siam* piece)
 
 void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement orientation)
 {
-    //fonction a completer
+    assert(piece!=NULL);
+    assert(type_etre_integre(type));
+    assert(orientation_etre_integre(orientation));
+  
     piece->type=type;
     piece->orientation=orientation;
+    
+    assert(piece_etre_integre(piece));
 }
 
 
