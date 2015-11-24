@@ -12,6 +12,7 @@ int piece_etre_integre(const piece_siam* piece)
     return 1; // modifier cette fonction
 }
 
+
 void piece_initialiser(piece_siam* piece)
 {
     assert(piece!=NULL);
@@ -140,3 +141,37 @@ piece_siam piece_correspondre_nom_cours(const char* nom_cours)
     return piece;
 
 }
+
+
+void test_piece_etre_integre(void)
+{
+  puts("test de piece_etre_integre");
+  piece_siam piece;
+  piece_siam *ptpiece=&piece;
+  const piece_siam *ptcstpiece=&piece;
+  piece_definir_rocher(ptpiece);
+  if(piece_etre_integre(ptcstpiece)==0)
+  {
+   puts("rocher KO");
+  }
+  piece_definir_case_vide(ptpiece);
+  if(piece_etre_integre(ptcstpiece)==0)
+  {
+    puts("case vide KO");
+  }
+  int k=0,l=0;
+  for(k=0;k<aucune_orientation;k++)
+  {
+   for(l=0;l<rocher;l++)
+   {
+     piece_definir(ptpiece,l,k);
+     if(piece_etre_integre(ptcstpiece)==0)
+     {
+       piece_afficher(ptcstpiece);
+       printf("KO\n");
+      }
+    }
+   }
+ }
+  
+  
