@@ -87,5 +87,15 @@ int type_caractere_animal_etre_integre(char type)
 
 type_piece type_correspondre_caractere_animal(char type)
 {
-    return elephant;//a completer avec l'enone
+  assert(type_caractere_animan_etre_intergre(type));
+  type_piece type_enum=elephant;
+  if(type=='e')
+  {
+    type_enum=elephant;
+  }
+  else
+  {
+    type_enum=rhinoceros;
+  }
+  return type_enum;
 }
