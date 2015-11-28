@@ -1,6 +1,6 @@
 #include "plateau_siam.h"
 #include "entree_sortie.h"
-
+#include "coordonnees_plateau.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -49,12 +49,18 @@ int plateau_etre_integre(const plateau_siam* plateau)
 
 piece_siam* plateau_obtenir_piece(plateau_siam* plateau,int x,int y)
 {
-    return &(plateau->piece[x][y]); //fonction a completer
+  assert(coordonnees_etre_dans_plateau(x,y));
+  assert(plateau!=NULL);
+  assert(plateau_etre_integre(plateau));
+  return &(plateau->piece[x][y]);
 }
 
 const piece_siam* plateau_obtenir_piece_info(const plateau_siam* plateau,int x,int y)
 {
-    return &(plateau->piece[x][y]);  //fonction a completer
+  assert(coordonnees_etre_dans_plateau(x,y));
+  assert(plateau!=NULL);
+  assert(plateau_etre_integre(plateau));
+  return &(plateau->piece[x][y]);
 }
 
 
