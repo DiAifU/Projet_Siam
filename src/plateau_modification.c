@@ -55,7 +55,17 @@ int plateau_modification_changer_orientation_piece_etre_possible(const plateau_s
 
 void plateau_modification_changer_orientation_piece(plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation)
 {
-    //coder cette fonction
+    assert(plateau!=NULL);
+    assert(plateau_etre_integre(plateau));
+    const piece_siam *p = plateau_obtenir_piece_info(plateau, x0, y0);
+    assert(piece_etre_animal(p));
+    assert(orientation_etre_integre_deplacement(orientation));
+    assert(plateau_modification_changer_orientation_piece_etre_possible(plateau, x0, y0, orientation));
+
+    plateau->piece[x0][y0].orientation = orientation;
+
+    assert(plateau_etre_integre(plateau));
+
 }
 
 

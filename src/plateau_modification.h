@@ -143,7 +143,7 @@ int plateau_modification_changer_orientation_piece_etre_possible(const plateau_s
  *          doit renvoyer 1 avec ces arguments).
  *    Garantie:
  *      - Un plateau modifie integrant le changement d'orientation.
- *      - La piece designees par les coordonnees est un animal
+ *      - La piece designee par les coordonnees est un animal
  *         integre, et le plateau est integre.
  */
 void plateau_modification_changer_orientation_piece(plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation);
