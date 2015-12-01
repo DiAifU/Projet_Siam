@@ -13,7 +13,12 @@ int coordonnees_etre_dans_plateau(int x,int y)
 
 int coordonnees_etre_bordure_plateau(int x,int y)
 {
-    return 1; //coder cette fonction
+    // Si coord pas dans plateau, c'est reglé
+    if (!coordonnees_etre_dans_plateau(x, y))
+      return 0;
+    
+    // Sinon on verifie que les coord sont sur les bordures
+    return x==0 || y==0 || x==(NBR_CASES-1) || y==(NBR_CASES-1);
 }
 
 void coordonnees_appliquer_deplacement(int* x,int* y,orientation_deplacement orientation)

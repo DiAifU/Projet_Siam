@@ -86,7 +86,17 @@ int coordonnees_etre_dans_plateau(int x,int y);
 int coordonnees_etre_bordure_plateau(int x,int y);
 
 /**
- * documentation a ecrire
+ * Fonction coordonnees_appliquer_deplacement:
+ * *************************
+ *    Effectue le deplacement des coord entiere (x,y) dans la direction
+ *     orientation.
+ *
+ *    Necessite:
+ *      - Deux pointeurs non nuls sur des coordonnees entieres
+ * 	- Une orientation correspondant à un deplacement integre
+ *    Garantie:
+ *      - Des coordonnées modifiées en conséquences selon l'orientation
+ * 	   passée en paramètre.
  */
 void coordonnees_appliquer_deplacement(int* x,int* y,orientation_deplacement orientation);
 
