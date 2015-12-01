@@ -203,15 +203,6 @@ void test_piece_etre_integre(void)
      }
     }
    }
-  for(k=10;k<100;k++)
-  {
-    for(l=10;l<100;l++)
-    {
-      piece_definir(ptpiece,k,l);
-      if(piece_etre_integre(ptcstpiece)==1)
-	printf("piece de valeur %d et orientation %d ko\n",k,l);
-    }
-  }
  }
   
   
