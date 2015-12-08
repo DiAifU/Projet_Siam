@@ -1,9 +1,6 @@
 #include "api_siam.h"
 #include "plateau_modification.h"
-<<<<<<< HEAD
-=======
 #include "joueur.h"
->>>>>>> 5ffcdd3595911d40d8774434d75b7b97139ea2b7
 #include <assert.h>
 #include <stdio.h>
 
