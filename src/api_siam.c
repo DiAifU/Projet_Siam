@@ -66,8 +66,13 @@ coup_jeu api_siam_tenter_deplacer_piece_si_possible(jeu_siam* jeu,
 coup_jeu api_siam_tenter_changer_orientation_piece_si_possible(jeu_siam* jeu,int x,int y,orientation_deplacement orientation)
 {
   assert(jeu!=NULL);
+  assert(jeu_etre_integre(jeu));
   coup_jeu coup;
   coup_jeu_initialiser(&coup);
+  if(orientation_etre_integre(orientation)==0){
+    coup.valide=0;
+    return coup;
+  }
   // on verifie si on peut changer l'orientation de la piece
   if(plateau_modification_changer_orientation_piece_etre_possible(&jeu->plateau,x,y,orientation)==0){
     coup.valide=0;
@@ -82,6 +87,7 @@ coup_jeu api_siam_tenter_changer_orientation_piece_si_possible(jeu_siam* jeu,int
      on change de joueur, on regarde s'il est victorieux et on renvoie le coup valide*/
   plateau_modification_changer_orientation_piece(&jeu->plateau,x,y,orientation);
   const piece_siam* piece=plateau_obtenir_piece_info(&jeu->plateau,x,y);
+  assert(piece!=NULL);
   assert(piece_etre_integre(piece));//on regarde si on a pas corrompu la piece
   jeu_changer_joueur(jeu);
   coup.valide=1;
