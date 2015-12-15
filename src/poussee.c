@@ -75,7 +75,6 @@ void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement 
   assert(coordonnees_etre_dans_plateau(x,y));
   assert(plateau_exister_piece(plateau,x,y));
   assert(orientation_etre_integre(orientation));
-  assert(type_etre_animal(type));
   if(poussee_etre_valide(plateau,x,y,orientation)==1){
     /*si la poussee est possible alors on cree un buffer ou on place la piece qui est
       deplacee et on met une case vide a sa place*/
