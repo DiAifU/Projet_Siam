@@ -67,7 +67,7 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
   exit(EXIT_FAILURE);
 }
 
-void poussee_realiser(plateau_siam* plateau,int x,int y,type_piece type,orientation_deplacement orientation,
+void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement orientation,
 		      condition_victoire_partie conditionVictoire)
 {
   assert(plateau!=NULL);
@@ -78,11 +78,11 @@ void poussee_realiser(plateau_siam* plateau,int x,int y,type_piece type,orientat
   assert(type_etre_animal(type));
   if(poussee_etre_valide(plateau,x,y,orientation)==1){
     /*si la poussee est possible alors on cree un buffer ou on place la piece qui est
-      deplacee et on met la nouvelle piece a sa place*/
+      deplacee et on met une case vide a sa place*/
     piece_siam bufferPiece1;
     piece_siam* pieceAModifier=plateau_obtenir_piece(plateau,x,y);
     bufferPiece1=*pieceAModifier;
-    piece_definir(pieceAModifier,type,orientation);
+    piece_definir_case_vide(pieceAModifier);
     /*puis on continue le deplacement des pieces jusqu'a ce qu'on atteigne une case
       vide ou la fin du plateau*/
     case_suivante_de_la_poussee(&x,&y,orientation);

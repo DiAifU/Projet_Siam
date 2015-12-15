@@ -57,7 +57,6 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
 *-Un pointeur non NULL vers un plateau integre modifiable.
 *-Deux coordonnees entieres (x,y) designant une piece non
 *vide integre du plateau.
-*-Un type d'animal a deplacer.
 *-Une orientation de poussee designant une direction integre.
 *-Un pointeur non NULL vers une condition de victoire modifiable.
 *Garantie:
@@ -65,7 +64,7 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
 *
 */
 
-void poussee_realiser(plateau_siam* plateau,int x,int y,type_piece type,orientation_deplacement orientation,
+void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement orientation,
 		      condition_victoire_partie conditionVictoire);
 
 #endif
