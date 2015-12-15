@@ -31,10 +31,6 @@ coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
       // Le coup n'est donc pas valide.
       coup.valide = 0;
     }
-    else if (!piece_etre_case_vide(plateau_obtenir_piece_info(&jeu->plateau, x, y))) {
-      /******* TODO ******** POUR L'INSTANT, ON NE GERE PAS LA POUSSEE */
-      coup.valide = 0;
-    }
     else {
       type_piece type_joueur_courant = jeu_obtenir_type_animal_courant(jeu);
       if (plateau_denombrer_type(&jeu->plateau, type_joueur_courant) >= NBR_ANIMAUX) {

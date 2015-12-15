@@ -86,7 +86,33 @@ typedef struct
 }action_a_realiser;
 
 
+
+/**
+ * Fonction action_initialiser:
+ * *************************
+ *    Initialise une action_a_realiser dans un etat par defaut integre.
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une action_a_realiser modifiable.
+ *    Garantie:
+ *      - Une action_a_realiser initialise integre.
+ */
 void action_initialiser(action_a_realiser* action_a_initialiser);
+
+
+/**
+ * Fonction ligne_de_commande_parser:
+ * *************************
+ *    Permet la traduction d'une chaine de caractère ligne_commande
+ * 	sous forme d'une structure action_a_realiser contenant 
+ * 	l'action que l'utilisateur a demandé en ligne de commande.
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une chaine de caractère non modifiable.
+ * 	- Un pointeur non NULL vers une action_a_realiser modifiable.
+ *    Garantie:
+ *      - Une action_a_realiser mise à jour selon la ligne_commande lue.
+ */
 void ligne_de_commande_parser(const char* ligne_commande,action_a_realiser* action_demandee);
 
 
