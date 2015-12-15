@@ -89,12 +89,17 @@ void poussee_realiser(plateau_siam* plateau,int x,int y,type_piece type,orientat
     piece_siam bufferPiece2;
     while(coordonnees_etre_dans_plateau(x,y)){
       pieceAModifier=plateau_obtenir_piece(plateau,x,y);
+      /*si on tombe sur une case vide alors on met la piece du buffer sur cette
+	case et on change les valeurs de x et y pour sortir du while*/
       if(piece_etre_case_vide(pieceAModifier)==1)
 	{
 	  *pieceAModifier=bufferPiece1;
 	  x=NBR_CASES+1;
 	  y=NBR_CASES+1;
 	}
+      /*sinon on met la piece de la case dans un second buffer, puis on met la piece
+	du premier buffer sur la case et a la fin on met la piece du second buffer
+	dans le premier afin qu'on puisse refaire le while*/
       else
       {
 	bufferPiece2=*pieceAModifier;
