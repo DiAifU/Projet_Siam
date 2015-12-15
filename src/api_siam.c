@@ -17,11 +17,13 @@ coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
     if (!coordonnees_etre_dans_plateau(x, y)) {
       // Dans le cas ou les coord ne sont pas de le
       // plateau, coup non valide.
+      puts("Erreur : Coordonnees hors du plateau");
       coup.valide = 0;
     }
     else if (!coordonnees_etre_bordure_plateau(x, y)) {
       // Dans le cas ou la pièce n'est pas introduite sur le bord
       // du plateau, le coup n'est pas valide.
+      puts("Erreur : Coordonnees hors du bord du plateau");
       coup.valide = 0;
     }
     else if (!orientation_etre_integre_deplacement(orientation)) {
@@ -35,7 +37,12 @@ coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
     }
     else {
       type_piece type_joueur_courant = jeu_obtenir_type_animal_courant(jeu);
-      if (plateau_modification_introduire_piece_etre_possible(&jeu->plateau, x, y, type_joueur_courant, orientation)) {
+      if (plateau_denombrer_type(&jeu->plateau, type_joueur_courant) >= NBR_ANIMAUX) {
+	// Déjà trop d'animaux sur le plateau pour le joueur courant
+	puts("Erreur : nombre maxmum d'animaux atteins");
+	coup.valide = 0;
+      }
+      else if (plateau_modification_introduire_piece_etre_possible(&jeu->plateau, x, y, type_joueur_courant, orientation)) {
 	// Le coup est valide !!!!! YOUPIIIII
 	plateau_modification_introduire_piece(&jeu->plateau, x, y, type_joueur_courant, orientation);
 	coup.valide = 1;
@@ -91,6 +98,9 @@ coup_jeu api_siam_tenter_deplacer_piece_si_possible(jeu_siam* jeu,
 	coup.valide = 1;
       }
     }
+    
+    if (coup.valide)
+      jeu_changer_joueur(jeu);
     
     
     assert(plateau_etre_integre(&jeu->plateau));
