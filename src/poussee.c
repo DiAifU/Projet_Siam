@@ -52,7 +52,7 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
       orientation_deplacement orientationPiece=piece_recuperer_orientation_animal(piece);
       //si la piece est un animal oppose au mouvement alors il n'est pas possible
       if(orientationPiece==orientationOpposeePoussee)
-	return 0;
+	nbrAnimauxMoinsRochers--;
       // sinon on regarde si son orientation s'ajoute a la poussee
       else if(orientationPiece==orientation)
 	nbrAnimauxMoinsRochers++;
