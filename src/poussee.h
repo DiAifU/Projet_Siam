@@ -58,13 +58,11 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
 *-Deux coordonnees entieres (x,y) designant une piece non
 *vide integre du plateau.
 *-Une orientation de poussee designant une direction integre.
-*-Un pointeur non NULL vers une condition de victoire modifiable.
 *Garantie:
 *-Un plateau integre mis a jour en ayant realise la poussee.
 *
 */
 
-void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement orientation,
-		      condition_victoire_partie conditionVictoire);
+void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement orientation);
 
 #endif

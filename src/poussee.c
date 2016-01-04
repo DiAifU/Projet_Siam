@@ -2,84 +2,70 @@
 #include <assert.h>
 #include <stdio.h>
 
-void case_suivante_de_la_poussee(int* ptx,int* pty,orientation_deplacement orientation)
-{
-  assert(ptx!=NULL);
-  assert(pty!=NULL);
-  assert(orientation_etre_integre(orientation));
-  int x=*ptx;
-  int y=*pty;
-  switch(orientation){
-  case haut:
-    y++;
-  break;
-  case bas:
-    y--;
-  break;
-  case gauche:
-    x--;
-  break;
-  case droite:
-    x++;
-  break;
-  default:
-    puts("erreur de case_suivante_de_la_poussee");
-    exit(EXIT_FAILURE);
-  }
-  *pty=y;
-  *ptx=x;
-}
+
 
 
 int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_deplacement orientation)
 {
-   //on fait tous les assert du contrat
+  // On fait tous les assert du contrat
   assert(plateau!=NULL);
   assert(plateau_etre_integre(plateau));
   assert(coordonnees_etre_dans_plateau(x,y));
   assert(plateau_exister_piece(plateau,x,y));
   assert(orientation_etre_integre(orientation));
-  //on regarde quel orientation est opposee au mouvement
+  
+  // On regarde quelle orientation est opposee au mouvement
   orientation_deplacement orientationOpposeePoussee=orientation_inverser(orientation);
-  /*on initialise une variable qui nous permettera de voir le nombre d'animaux qui poussent
-    un ou plusieurs rochers*/
-   int nbrAnimauxMoinsRochers=1;
-  while(coordonnees_etre_dans_plateau(x,y)){
-    // on recupere la piece indiquee par les coordonnees
-    const piece_siam* piece=plateau_obtenir_piece_info(plateau,x,y);
+  
+  
+  /* On définit la puissance comme le nb d'animaux dans l'orientation de la poussee
+   * moins le nb dans le sens inverse de la poussee */
+  int puissance=0;
+  
+  int nbrRochers=0;
+  while (coordonnees_etre_dans_plateau(x,y)) {
+    // On recupere la piece indiquee par les coordonnees
+    const piece_siam* piece = plateau_obtenir_piece_info(plateau,x,y);
     assert(piece!=NULL);
-    if(piece_etre_animal(piece)){
-      orientation_deplacement orientationPiece=piece_recuperer_orientation_animal(piece);
-      //si la piece est un animal oppose au mouvement alors il n'est pas possible
-      if(orientationPiece==orientationOpposeePoussee)
-	nbrAnimauxMoinsRochers--;
-      // sinon on regarde si son orientation s'ajoute a la poussee
-      else if(orientationPiece==orientation)
-	nbrAnimauxMoinsRochers++;
+    
+    if(piece_etre_animal(piece)) {
+      orientation_deplacement orientationPiece = piece_recuperer_orientation_animal(piece);
+      
+      // Si la piece est un animal oppose au mouvement alors il n'est pas possible
+      if(orientationPiece == orientationOpposeePoussee)
+	puissance--;
+      
+      // Sinon il lui ajoute de la force (peu importe la direction tant quelle n'est pas opposee)
+      else
+	puissance++;
     }
-    /*si on a un rocher alors on diminue nbrAnimauxMoinsRochers, et si il s'avere qu'il devient
-      negatif alors ca signifie qu'il y a plus de rochers que d'animaux qui poussent.
-      La poussee n'est donc pas possible*/
-   else if(piece_etre_rocher(piece)==1){
-      nbrAnimauxMoinsRochers--;
-      if(nbrAnimauxMoinsRochers<0)
-	return 0;
+    else if (piece_etre_rocher(piece)){
+      nbrRochers++;
     }
-    /*si on tombe sur une case vide alors on sort du while car il n'y a plus de pieces 
-      impliquees dans la poussee*/
-     else if(piece_etre_case_vide(piece)){
+    
+    /* Si on tombe sur une case vide alors on sort du while car il n'y a plus de pieces 
+     * impliquees dans la poussee */
+     else if (piece_etre_case_vide(piece)) {
       x=NBR_CASES+1;
       y=NBR_CASES+1;
     }
-    case_suivante_de_la_poussee(&x,&y,orientation);
+    coordonnees_appliquer_deplacement(&x,&y,orientation);
   }
-  /*si on a atteint le return 1, cela signifie qu'on a pas rencontre d'animal oppose au mouvement
-    et que le nombre d'animaux qui poussent les rochers sont adequat. La poussee est donc possible*/
+  
+  printf("Puiss : %d nbrRoch : %d\n", puissance, nbrRochers);
+  /* Si il y a autant ou moins d'animaux dans le sens opposé que dans les autres sens
+   * il n'est pas possible de pousser */
+  if (puissance <= 0)
+    return 0;
+  
+  // Si il y a strictement moins de puissance que de rochers, pas possible non plus
+  if (puissance < nbrRochers) 
+    return 0;
+  
   return 1;
 }
 
-void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement orientation,
-		      condition_victoire_partie conditionVictoire)
+void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement orientation)
 {
   assert(plateau!=NULL);
   assert(plateau_etre_integre(plateau));
@@ -95,7 +81,7 @@ void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement 
     piece_definir_case_vide(pieceAModifier);
     /*puis on continue le deplacement des pieces jusqu'a ce qu'on atteigne une case
       vide ou la fin du plateau*/
-    case_suivante_de_la_poussee(&x,&y,orientation);
+    coordonnees_appliquer_deplacement(&x,&y,orientation);
     piece_siam bufferPiece2;
     while(coordonnees_etre_dans_plateau(x,y)){
       pieceAModifier=plateau_obtenir_piece(plateau,x,y);
@@ -115,7 +101,7 @@ void poussee_realiser(plateau_siam* plateau,int x,int y,orientation_deplacement 
 	bufferPiece2=*pieceAModifier;
 	*pieceAModifier=bufferPiece1;
 	bufferPiece1=bufferPiece2;
-	case_suivante_de_la_poussee(&x,&y,orientation);
+	coordonnees_appliquer_deplacement(&x,&y,orientation);
       }
     }
   }
