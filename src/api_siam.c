@@ -3,7 +3,7 @@
 #include "joueur.h"
 #include <assert.h>
 #include <stdio.h>
- 
+
 coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
                                                                int x,int y,
                                                                orientation_deplacement orientation)
