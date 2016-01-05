@@ -1,0 +1,8 @@
+#test_unitaire_ok_03
+#
+# test si il est possible de changer l'otientation d'un rhinoceros (lecture d'un fichier d'entree)
+lit ../test/test_unitaire_ok/test_ok_03_entree.txt
+o 0 0 <
+fin
+#comportement attendu:
+# le rhinoceros s'oriente vers la gauche

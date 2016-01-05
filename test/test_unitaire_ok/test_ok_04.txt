@@ -1,0 +1,8 @@
+#test_unitaire_ok_04
+#
+# test si il est possible de changer l'otientation d'un elephant (lecture d'un fichier d'entree)
+lit ../test/test_unitaire_ok/test_ok_04_entree.txt
+o 2 3 >
+fin
+#comportement attendu:
+# l'elephant s'oriente vers la droite

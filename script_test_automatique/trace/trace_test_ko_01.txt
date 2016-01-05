@@ -1,0 +1,78 @@
+
+***********************
+Jeu SIAM mode interactif:
+***********************
+Commandes:
+> #                 : Commentaires, tout ce qui suit # n'est pas analyse.
+> i                 : [I]nitialisation du jeu.
+> n x0 y0 dir       : [N]ouvelle piece introduite en (x0,y0) avec direction indiquee.
+> d x0 y0 dir0 dir1 : [D]eplacement piece de (x0,y0) dans le sens dir0 indique
+                         et ayant la direction dir1 a l'arrive.
+> o x0 y0 dir       : [O]rientation nouvelle de la piece en (x0,y0).
+> lit [NOM_FICHIER] : Lire un fichier externe.
+
+directions possibles: gauche <, droite >, haut ^, bas v.
+***********************
+
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+Ligne non valide, action non realisee
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+Ligne non valide, action non realisee
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+Ligne non valide, action non realisee
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+ lit ../test/test_unitaire_ko/test_ko_01_entree.txt
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] r-v | RRR | RRR | RRR | *** | 
+[1] e-^ | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> Echec deplacement piece impossible
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] r-v | RRR | RRR | RRR | *** | 
+[1] e-^ | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> Fin de la partie

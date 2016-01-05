@@ -1,0 +1,8 @@
+#test_ok_06
+#
+# test si il est possible d'introduire un rhinoceros
+lit ../test/test_unitaire_ok/test_ok_06_entree.txt
+n 4 3 <
+fin
+#comportement attendu:
+# un rhinoceros est introduit en (4,3) avec l'orientation gauche

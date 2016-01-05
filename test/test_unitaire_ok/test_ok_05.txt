@@ -1,0 +1,8 @@
+#test_ok_05
+#
+# test si il est possible de deplacer un rhinoceros
+lit ../test/test_unitaire_ok/test_ok_05_entree.txt
+d 4 4 < v
+fin
+#comportement attendu:
+# l'elephant se deplace d'une case et son orientation est "bas"

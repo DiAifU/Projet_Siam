@@ -1,0 +1,79 @@
+
+***********************
+Jeu SIAM mode interactif:
+***********************
+Commandes:
+> #                 : Commentaires, tout ce qui suit # n'est pas analyse.
+> i                 : [I]nitialisation du jeu.
+> n x0 y0 dir       : [N]ouvelle piece introduite en (x0,y0) avec direction indiquee.
+> d x0 y0 dir0 dir1 : [D]eplacement piece de (x0,y0) dans le sens dir0 indique
+                         et ayant la direction dir1 a l'arrive.
+> o x0 y0 dir       : [O]rientation nouvelle de la piece en (x0,y0).
+> lit [NOM_FICHIER] : Lire un fichier externe.
+
+directions possibles: gauche <, droite >, haut ^, bas v.
+***********************
+
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+Ligne non valide, action non realisee
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+Ligne non valide, action non realisee
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+Ligne non valide, action non realisee
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | *** | 
+[3] *** | *** | *** | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> 
+ lit ../test/test_unitaire_ok/test_ok_06_entree.txt
+
+joueur 1 (rhinoceros)
+[4] *** | *** | *** | *** | r-^ | 
+[3] *** | *** | e-v | *** | *** | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+>   n 4 3 <
+
+
+joueur 0 (elephant)
+[4] *** | *** | *** | *** | r-^ | 
+[3] *** | *** | e-v | *** | r-< | 
+[2] *** | RRR | RRR | RRR | *** | 
+[1] *** | *** | *** | *** | *** | 
+[0] *** | *** | *** | *** | *** | 
+    [0]   [1]   [2]   [3]   [4]   
+> Fin de la partie
