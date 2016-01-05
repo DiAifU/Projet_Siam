@@ -99,6 +99,8 @@ void entree_sortie_ecrire_jeu_fichier(const char* filename,const jeu_siam* jeu)
     }
 }
 
+
+
 void entree_sortie_lire_jeu_fichier(const char* filename,jeu_siam* jeu)
 {
     const char *lgn_joueur0 = "joueur 0 (elephant)"; 
@@ -109,11 +111,11 @@ void entree_sortie_lire_jeu_fichier(const char* filename,jeu_siam* jeu)
     FILE *identifiant = fopen(filename, "r");
     jeu_initialiser(jeu);
     if (identifiant == NULL) {
-      printf("Erreur ouverture fichier %s\n", filename);s
+      printf("Erreur ouverture fichier %s\n", filename);
       exit(1);
     }
     int y, i;
-    char *pieces[NBR_CASES];
+    char pieces[3][NBR_CASES];
     // 100 : valeur arbitraire, fgets() s'arrete au \n
     while (fgets(buffer, 100, identifiant) != 0) {
       if (strlen(buffer) >= 11 && strncmp(buffer, lgn_joueur0, strlen(lgn_joueur0)) == 0)
@@ -125,9 +127,7 @@ void entree_sortie_lire_jeu_fichier(const char* filename,jeu_siam* jeu)
 	  puts("Erreur lecture numero de ligne");
 	  exit(1);
 	}
-	puts("coucou");
-	for (i = 0; i < 5; i++) {
-	  puts("coucou2");
+	for (i = 0; i < NBR_CASES; i++) {
 	  jeu->plateau.piece[i][y] = piece_correspondre_nom_cours(pieces[i]);
 	}
       }
