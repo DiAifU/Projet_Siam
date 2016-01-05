@@ -1,0 +1,9 @@
+#test_unitaire_ko_02
+#
+# test l'interdiction de deplacer plusieurs rochers avec un elephant
+lit ../test/test_unitaire_ko/test_ko_02_entree.txt
+d 1 2 > >
+fin
+#Comportement attendu:
+# l'elephant poussant deux rochers, aucune piece ne doit bouger, le mouvement est invalide.
+

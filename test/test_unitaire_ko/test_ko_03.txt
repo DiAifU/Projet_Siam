@@ -1,0 +1,9 @@
+#test_unitaire_ko_03
+#
+# test l'interdiction d'introduire une piece hors du bord du plateau
+i
+n 1 2 > 
+fin
+#Comportement attendu:
+# l'introduction hors du bord du plateau est interdite par les regles du jeu, la piece ne doit pas etre introduite.
+
