@@ -5,7 +5,6 @@ _OBJ = api_siam.o condition_victoire_partie.o coordonnees_plateau.o coup_jeu.o e
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 jeu_siam : $(OBJ)
-	mkdir bin
 	gcc -o ./bin/$@ $^ $(CFLAGS)
 
 all : jeu_siam compress verif
