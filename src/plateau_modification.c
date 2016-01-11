@@ -151,7 +151,7 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
     // Dans le cas ou la piece n'est pas bien orientée pour la poussee
     coordonnees_appliquer_deplacement(&x_suivant, &y_suivant, direction_deplacement);
     if (plateau_exister_piece(plateau,x_suivant,y_suivant)) {
-      if (!poussee_etre_valide(plateau, x_suivant, y_suivant, direction_deplacement) || (piece_etre_animal(piece) && orientation != piece_recuperer_orientation_animal(piece)))
+      if (!poussee_etre_valide(plateau, x_suivant, y_suivant, direction_deplacement) || orientation != piece_recuperer_orientation_animal(piece) || orientation != direction_deplacement)
 	return 0;
     }
     

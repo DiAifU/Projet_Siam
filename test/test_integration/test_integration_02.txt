@@ -1,0 +1,10 @@
+#Test une suite de mouvements, tous valides
+i
+n 2 0 ^
+n 2 0 ^
+o 2 1 >
+d 2 0 ^ ^
+n 4  v
+n 4 0 v
+fin
+

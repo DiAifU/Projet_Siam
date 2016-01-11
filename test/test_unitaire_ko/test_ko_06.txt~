@@ -1,0 +1,11 @@
+#test_unitaire_ko_03
+#
+# test le changement d'orientation d'une piece de l'adversaire
+i
+n 0 0 ^
+n 1 0 >
+o 0 0 > 
+fin
+#Comportement attendu:
+# Ne doit pas fonctionner
+

@@ -1,0 +1,9 @@
+#test_unitaire_ko_03
+#
+# test l'interdiction d'introduire en poussant dans le sens oppose d'une piece deja existante
+lit ../test/test_unitaire_ko/test_ko_04_entree.txt
+n 0 1 v 
+fin
+#Comportement attendu:
+# l'introduction en poussant n'est pas possible si la piece est dans le sens oppose, l'introduction ne doit pas etre faite.
+

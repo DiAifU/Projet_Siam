@@ -1,0 +1,9 @@
+#test_unitaire_ko_03
+#
+# test le changement d'orientation d'un rocher
+i
+o 2 2 ^ 
+fin
+#Comportement attendu:
+# Ne doit pas fonctionner
+
