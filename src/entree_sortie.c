@@ -103,9 +103,11 @@ void entree_sortie_ecrire_jeu_fichier(const char* filename,const jeu_siam* jeu)
 
 void entree_sortie_lire_jeu_fichier(const char* filename,jeu_siam* jeu)
 {
-    const char *lgn_joueur0 = "joueur 0 (elephant)"; 
-    const char *lgn_joueur1 = "joueur 1 (rhinoceros)";
-    const char* lgn="[%d] %s | %s | %s | %s | %s |";
+    const char *lgn_joueur = "joueur %d"; 
+    int joueur;
+    const char *lgn_int = "[%d]";
+    const char *lgn_str = "[%s]";
+    char y_str[10];
     char buffer[100];
     
     FILE *identifiant = fopen(filename, "r");
@@ -115,20 +117,23 @@ void entree_sortie_lire_jeu_fichier(const char* filename,jeu_siam* jeu)
       exit(1);
     }
     int y, i;
-    char pieces[3][NBR_CASES];
     // 100 : valeur arbitraire, fgets() s'arrete au \n
     while (fgets(buffer, 100, identifiant) != 0) {
-      if (strlen(buffer) >= 11 && strncmp(buffer, lgn_joueur0, strlen(lgn_joueur0)) == 0)
-	jeu->joueur = 0;
-      else if (strlen(buffer) >= 11 && strncmp(buffer, lgn_joueur1, strlen(lgn_joueur1)) == 0)
-	jeu->joueur = 1;
-      else if (sscanf(buffer, lgn, &y, pieces[0], pieces[1], pieces[2], pieces[3], pieces[4]) == 6) {
-	if (y < 0 || y > 4) {
+      if (sscanf(buffer, lgn_joueur, &joueur) == 1)
+	jeu->joueur = joueur;
+      else if (sscanf(buffer, lgn_int, &y) == 1) {
+	sscanf(buffer, lgn_str, &y_str);
+	if (y < 0 || y > NBR_CASES) {
 	  puts("Erreur lecture numero de ligne");
 	  exit(1);
 	}
 	for (i = 0; i < NBR_CASES; i++) {
-	  jeu->plateau.piece[i][y] = piece_correspondre_nom_cours(pieces[i]);
+	  char type_piece_nom_cours[4];
+	  type_piece_nom_cours[0] = buffer[strlen(y_str) + 2 + i*6];
+	  type_piece_nom_cours[1] = buffer[strlen(y_str) + 3 + i*6];
+	  type_piece_nom_cours[2] = buffer[strlen(y_str) + 4 + i*6];
+	  type_piece_nom_cours[3] = '\0';
+	  jeu->plateau.piece[i][y] = piece_correspondre_nom_cours(type_piece_nom_cours);
 	}
       }
     }

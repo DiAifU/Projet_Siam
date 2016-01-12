@@ -22,7 +22,6 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
   /* On définit la puissance comme le nb d'animaux dans l'orientation de la poussee
    * moins le nb dans le sens inverse de la poussee. Elle est initialisée à 1 pour
    * comptabiliser aussi la pièce à l'origine de la poussee */
-  int puissance=1;
   int animauxBonneDirection=1;
   int nbrRochers=0;
   while (coordonnees_etre_dans_plateau(x,y)) {
@@ -36,15 +35,10 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
       // Si la piece est un animal oppose au mouvement alors il n'est pas possible
       if(orientationPiece == orientationOpposeePoussee) {
 	animauxBonneDirection--;
-	puissance--;
       }
       else if (orientationPiece == orientation) {
 	animauxBonneDirection++;
-	puissance++;
       }
-      // Sinon il lui ajoute de la force uniquement contre les animaux
-      else
-	puissance++;
     }
     else if (piece_etre_rocher(piece)){
       nbrRochers++;
@@ -57,16 +51,17 @@ int poussee_etre_valide(const plateau_siam* plateau,int x,int y,orientation_depl
       y=NBR_CASES+1;
     }
     coordonnees_appliquer_deplacement(&x,&y,orientation);
-  }
-  
-  /* Si il y a autant ou moins d'animaux dans le sens opposé que dans les autres sens
+    
+   /* Si il y a autant ou moins d'animaux dans le sens opposé que dans les autres sens
    * il n'est pas possible de pousser */
-  if (puissance <= 0)
-    return 0;
-  
-  // Si il y a strictement moins de puissance que de rochers, pas possible non plus
-  if (animauxBonneDirection < nbrRochers) 
-    return 0;
+    if (animauxBonneDirection <= 0)
+      return 0; 
+    
+    // Si il y a strictement moins de puissance que de rochers, pas possible non plus
+    if (animauxBonneDirection < nbrRochers) 
+      return 0;
+  }
+
   
   return 1;
 }

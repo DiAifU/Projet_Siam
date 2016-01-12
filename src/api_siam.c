@@ -1,6 +1,8 @@
 #include "api_siam.h"
 #include "plateau_modification.h"
 #include "joueur.h"
+#include "condition_victoire_partie.h"
+#include "victoire_siam.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -19,38 +21,50 @@ coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
       // plateau, coup non valide.
       puts("Erreur : Coordonnees hors du plateau");
       coup.valide = 0;
+      return coup;
     }
-    else if (!coordonnees_etre_bordure_plateau(x, y)) {
+    if (!coordonnees_etre_bordure_plateau(x, y)) {
       // Dans le cas ou la pièce n'est pas introduite sur le bord
       // du plateau, le coup n'est pas valide.
       puts("Erreur : Coordonnees hors du bord du plateau");
       coup.valide = 0;
+      return coup;
     }
-    else if (!orientation_etre_integre_deplacement(orientation)) {
+    if (!orientation_etre_integre_deplacement(orientation)) {
       // L'orientation n'est pas integre, ou est aucune_orientation
       // Le coup n'est donc pas valide.
       coup.valide = 0;
+      return coup;
     }
-    else {
-      type_piece type_joueur_courant = jeu_obtenir_type_animal_courant(jeu);
-      if (plateau_denombrer_type(&jeu->plateau, type_joueur_courant) >= NBR_ANIMAUX) {
-	// Déjà trop d'animaux sur le plateau pour le joueur courant
-	puts("Erreur : nombre maxmum d'animaux atteins");
-	coup.valide = 0;
-      }
-      else if (plateau_modification_introduire_piece_etre_possible(&jeu->plateau, x, y, type_joueur_courant, orientation)) {
-	// Le coup est valide !!!!! YOUPIIIII
-	plateau_modification_introduire_piece(&jeu->plateau, x, y, type_joueur_courant, orientation);
-	coup.valide = 1;
-      }
+    type_piece type_joueur_courant = jeu_obtenir_type_animal_courant(jeu);
+    if (plateau_denombrer_type(&jeu->plateau, type_joueur_courant) >= NBR_ANIMAUX) {
+      // Déjà trop d'animaux sur le plateau pour le joueur courant
+      puts("Erreur : nombre maxmum d'animaux atteins");
+      coup.valide = 0;
+      return coup;
     }
-
-    /* ********* TODO ***********
-    ** Ajouter condition victoire
-    */
-
-    if (coup.valide)
+    
+    if (plateau_modification_introduire_piece_etre_possible(&jeu->plateau, x, y, type_joueur_courant, orientation)) {
+      // Le coup est valide !!!!! YOUPIIIII
+      plateau_modification_introduire_piece(&jeu->plateau, x, y, type_joueur_courant, orientation);
+      coup.valide = 1;
+      
+      if (plateau_denombrer_type(&jeu->plateau, rocher) < NBR_ROCHERS) {
+	// On a un gagnant !!!
+	condition_victoire_partie cdt_vic = victoire_determiner_gagnant(&jeu->plateau, x, y, orientation);
+	coup.condition_victoire = cdt_vic;
+	  
+	assert(coup_etre_integre(&coup));
+	assert(condition_victoire_etre_victorieux(&cdt_vic));
+	  
+	condition_victoire_afficher(&cdt_vic);
+	
+      }
+      
+      
       jeu_changer_joueur(jeu);
+    }
+
 
     return coup;
 }
@@ -72,31 +86,50 @@ coup_jeu api_siam_tenter_deplacer_piece_si_possible(jeu_siam* jeu,
       // Dans le cas ou les coord ne sont pas de le
       // plateau, coup non valide.
       coup.valide = 0;
+      return coup;
     }
-    else if (!orientation_etre_integre_deplacement(deplacement)) {
+    if (!orientation_etre_integre_deplacement(deplacement)) {
       // L'orientation de déplacement n'est pas integre, ou est aucune_orientation
       // Le coup n'est donc pas valide.
       coup.valide = 0;
+      return coup;
     }
-    else if (!orientation_etre_integre_deplacement(orientation)) {
+    if (!orientation_etre_integre_deplacement(orientation)) {
       // L'orientation finale n'est pas integre, ou est aucune_orientation
       // Le coup n'est donc pas valide.
       coup.valide = 0;
+      return coup;
     }
-    else if (!jeu_verifier_type_piece_a_modifier(jeu, x, y)) {
+    if (!jeu_verifier_type_piece_a_modifier(jeu, x, y)) {
       // La piece en question est celle de l'autre joueur
       // Le coup n'est pas valide.
       coup.valide = 0;
-    }
-    else {
-      if (plateau_modification_deplacer_piece_etre_possible(&jeu->plateau, x, y, deplacement, orientation)) {
-	plateau_modification_deplacer_piece(&jeu->plateau, x, y, deplacement, orientation);
-	coup.valide = 1;
-      }
+      return coup;
     }
     
-    if (coup.valide)
-      jeu_changer_joueur(jeu);
+    int x_suivant = x, y_suivant = y;
+    coordonnees_appliquer_deplacement(&x_suivant, &y_suivant, deplacement);
+    if (plateau_exister_piece(&jeu->plateau, x_suivant, y_suivant) && deplacement != piece_recuperer_orientation_animal(plateau_obtenir_piece_info(&jeu->plateau, x, y))) {
+      coup.valide = 0;
+      return coup;
+    }
+    if (plateau_modification_deplacer_piece_etre_possible(&jeu->plateau, x, y, deplacement, orientation)) {
+	plateau_modification_deplacer_piece(&jeu->plateau, x, y, deplacement, orientation);
+	coup.valide = 1;
+	
+	if (plateau_denombrer_type(&jeu->plateau, rocher) < NBR_ROCHERS) {
+	  // On a un gagnant !!!
+	  condition_victoire_partie cdt_vic = victoire_determiner_gagnant(&jeu->plateau, x_suivant, y_suivant, orientation);
+	  coup.condition_victoire = cdt_vic;
+	  
+	  assert(coup_etre_integre(&coup));
+	  assert(condition_victoire_etre_victorieux(&cdt_vic));
+	  
+	  condition_victoire_afficher(&cdt_vic);
+	}
+	
+	jeu_changer_joueur(jeu);
+    }
     
     
     assert(plateau_etre_integre(&jeu->plateau));

@@ -30,30 +30,27 @@ int plateau_modification_introduire_piece_etre_possible(const plateau_siam* plat
   if (!orientation_etre_integre_deplacement(orientation))
     return 0;
   
+  if (plateau_denombrer_type(plateau,type)>=NBR_ANIMAUX)
+    return 0;
+  
   if (plateau_exister_piece(plateau, x, y)) {
     if (!poussee_etre_valide(plateau, x, y, orientation))
 	return 0;
     
     // Dans le cas d'une poussee, seule les orientations à l'interieur
     // du plateau sont valides.
-    // Ex : x==0 => orientation bas impossible
-    if (x==0) {
-      if (orientation == gauche)
-	  return 0;
-    }
-    else if (x==NBR_CASES) {
-      if (orientation == droite)
-	  return 0;
-    }
+    // Ex : x==0 => orientation gauche impossible
+    if (x==0 && orientation == gauche)
+      return 0;
     
-    if (y==0) {
-      if (orientation == bas)
-	return 0;
-    }
-    else if (y==NBR_CASES) {
-      if (orientation == haut)
-	  return 0;
-    }
+    if (x==NBR_CASES && orientation == droite)
+      return 0;
+    
+    if (y==0 && orientation == bas)
+      return 0;
+    
+    if (y==NBR_CASES && orientation == haut)
+      return 0;
   }
   return 1;
 }
@@ -69,6 +66,7 @@ void plateau_modification_introduire_piece(plateau_siam* plateau,
   assert(type_etre_integre(type));
   assert(orientation_etre_integre_deplacement(orientation));
   assert(plateau_modification_introduire_piece_etre_possible(plateau, x, y, type, orientation));
+  assert(coordonnees_etre_bordure_plateau(x,y));
       
   piece_siam* piece = plateau_obtenir_piece(plateau,x,y);
   if (!piece_etre_case_vide(piece)) {
@@ -136,7 +134,6 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
     assert(plateau_etre_integre(plateau));
     assert(orientation_etre_integre(direction_deplacement));
     assert(orientation_etre_integre(orientation));
-
     if (!coordonnees_etre_dans_plateau(x0,y0))
       return 0;
     if (!plateau_exister_piece(plateau,x0,y0))
@@ -147,11 +144,13 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
       return 0;
     int x_suivant = x0;
     int y_suivant = y0;
-    const piece_siam *piece = plateau_obtenir_piece_info(plateau, x0, y0);
-    // Dans le cas ou la piece n'est pas bien orientée pour la poussee
     coordonnees_appliquer_deplacement(&x_suivant, &y_suivant, direction_deplacement);
+    
+    if (!coordonnees_etre_dans_plateau(x_suivant, y_suivant))
+      return 1;
+    // Dans le cas ou la piece n'est pas bien orientée pour la poussee
     if (plateau_exister_piece(plateau,x_suivant,y_suivant)) {
-      if (!poussee_etre_valide(plateau, x_suivant, y_suivant, direction_deplacement) || orientation != piece_recuperer_orientation_animal(piece) || orientation != direction_deplacement)
+      if (!poussee_etre_valide(plateau, x_suivant, y_suivant, direction_deplacement) || orientation != direction_deplacement)
 	return 0;
     }
     
@@ -175,7 +174,10 @@ void plateau_modification_deplacer_piece(plateau_siam* plateau,
     int x_suivant=x0, y_suivant=y0;
     coordonnees_appliquer_deplacement(&x_suivant, &y_suivant, direction_deplacement);
     
-    if (plateau_exister_piece(plateau, x_suivant, y_suivant)) {
+    if (!coordonnees_etre_dans_plateau(x_suivant, y_suivant)) {
+      piece_definir_case_vide(piece);
+    }
+    else if (plateau_exister_piece(plateau, x_suivant, y_suivant)) {
       assert(poussee_etre_valide(plateau, x0, y0, direction_deplacement));
       poussee_realiser(plateau, x0, y0, direction_deplacement);
     }
