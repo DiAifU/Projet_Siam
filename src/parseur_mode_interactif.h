@@ -52,7 +52,7 @@
 #define PARSEUR_MODE_INTERACTIF_H
 
 
-#include "orientation_deplacement.h"
+#include "../libsiam/orientation_deplacement.h"
 
 typedef enum
 {

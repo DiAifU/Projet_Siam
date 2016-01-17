@@ -1,9 +1,9 @@
 
 
 #include "mode_interactif.h"
-#include "api_siam.h"
+#include "../libsiam/api_siam.h"
 #include "parseur_mode_interactif.h"
-#include "entree_sortie.h"
+#include "../libsiam/entree_sortie.h"
 
 
 #include <stdio.h>

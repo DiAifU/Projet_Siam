@@ -50,7 +50,7 @@
 #ifndef MODE_INTERACTIF_H
 #define MODE_INTERACTIF_H
 
-#include "jeu_siam.h"
+#include "../libsiam/jeu_siam.h"
 
 /**
  * Fonction mode_interactif_lancer:
